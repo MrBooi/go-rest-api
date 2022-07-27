@@ -14,7 +14,9 @@ type Comment struct {
 	Author string
 }
 
-type Store interface {
+// store - this interface defines all of the methods
+// that our service needs in order to operate
+type Store interface { // repository layer
 	GetComment(ctx context.Context, id string) (Comment, error)
 }
 
