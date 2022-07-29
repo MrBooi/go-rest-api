@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"fmt"
 
 	"github.com/MrBooi/go-rest-api/internal/db"
@@ -16,8 +15,8 @@ func Run() error {
 		return fmt.Errorf("could not connect to database: %w", err)
 	}
 
-	if err := database.Ping(context.Background()); err != nil {
-		fmt.Println(err)
+	if err := db.MigrateDB(database); err != nil {
+		fmt.Println("failed to migrate database")
 		return err
 	}
 
