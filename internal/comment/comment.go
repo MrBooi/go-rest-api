@@ -22,7 +22,7 @@ type Comment struct {
 
 // store - this interface defines all of the methods
 // that our service needs in order to operate
-type Store interface { // repository layer
+type StoreComment interface { // repository layer
 	GetComment(ctx context.Context, id string) (Comment, error)
 	UpdateComment(ctx context.Context, id string) error
 	DeleteComment(ctx context.Context, id string) error
@@ -32,12 +32,12 @@ type Store interface { // repository layer
 // service -  is the struct on which all our
 // logic will be applied/ be build on top of
 type Service struct {
-	Store Store
+	Store StoreComment
 }
 
 // NewService - returns a pointer to a new
 // service
-func NewService(store Store) *Service {
+func NewService(store StoreComment) *Service {
 	return &Service{
 		Store: store,
 	}
