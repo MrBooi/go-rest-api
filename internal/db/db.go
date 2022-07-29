@@ -5,12 +5,28 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/MrBooi/go-rest-api/internal/comment"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
 )
 
 type Database struct {
 	Client *sqlx.DB
+}
+
+// CreateComment implements comment.Store
+func (*Database) CreateComment(ctx context.Context, cmt comment.Comment) (comment.Comment, error) {
+	panic("unimplemented")
+}
+
+// DeleteComment implements comment.Store
+func (*Database) DeleteComment(ctx context.Context, id string) error {
+	panic("unimplemented")
+}
+
+// UpdateComment implements comment.Store
+func (*Database) UpdateComment(ctx context.Context, id string) error {
+	panic("unimplemented")
 }
 
 // NewDatabase - returns a pointer to a database object
