@@ -25,7 +25,7 @@ func (*Database) DeleteComment(ctx context.Context, id string) error {
 }
 
 // UpdateComment implements comment.Store
-func (*Database) UpdateComment(ctx context.Context, id string) error {
+func (*Database) UpdateComment(ctx context.Context, id string, cmt comment.Comment) (comment.Comment, error) {
 	panic("unimplemented")
 }
 

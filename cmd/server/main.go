@@ -23,6 +23,14 @@ func Run() error {
 	}
 
 	cmtService := comment.NewService(store)
+
+	cmtService.PostComment(context.Background(), comment.Comment{
+		ID:     "71c5d074-b6cf-11ec-b909-0242ac120002",
+		Slug:   "test-slug",
+		Body:   "test-body",
+		Author: "test-author",
+	})
+
 	fmt.Println(cmtService.GetComment(context.Background(), "71c5d074-b6cf-11ec-b909-0242ac120002"))
 
 	fmt.Println("successfully connected to database")
