@@ -1,8 +1,13 @@
 package http
 
 import (
+	"context"
 	"fmt"
+	"log"
 	"net/http"
+	"os"
+	"os/signal"
+	"time"
 
 	"github.com/gorilla/mux"
 )
@@ -38,8 +43,22 @@ func (h *Handler) mapRoutes() {
 }
 
 func (h *Handler) Serve() error {
-	if err := h.Server.ListenAndServe(); err != nil {
-		return err
+	go func() {
+		if err := h.Server.ListenAndServe(); err != nil {
+			log.Println(err.Error())
+		}
+	}()
+
+	channel := make(chan os.Signal, 1)
+	signal.Notify(channel, os.Interrupt)
+	<-channel // block until this is executed
+
+	cxt, cancel := context.WithTimeout(context.Background(), 15*time.Second)
+	defer cancel()
+	if err := h.Server.Shutdown(cxt); err != nil {
+		log.Println("error  while shutting down")
 	}
+
+	log.Println("Shut down gracefully")
 	return nil
 }
