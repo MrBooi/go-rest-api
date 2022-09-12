@@ -1,11 +1,11 @@
 package main
 
 import (
-	"context"
 	"fmt"
 
 	"github.com/MrBooi/go-rest-api/internal/comment"
 	"github.com/MrBooi/go-rest-api/internal/db"
+	transportHttp "github.com/MrBooi/go-rest-api/internal/transport/http"
 )
 
 // Run - is going to be executed when you run the program
@@ -24,14 +24,11 @@ func Run() error {
 
 	cmtService := comment.NewService(db)
 
-	// cmtService.PostComment(context.Background(), comment.Comment{
-	// 	ID:     "71c5d074-b6cf-11ec-b909-0242ac120002",
-	// 	Slug:   "test-slug",
-	// 	Body:   "test-body",
-	// 	Author: "test-author",
-	// })
+	httpHandler := transportHttp.NewHandler(cmtService)
 
-	fmt.Println(cmtService.GetComment(context.Background(), "35270f54-a188-49b9-9c6e-4d853e72eca6"))
+	if err := httpHandler.Serve(); err != nil {
+		return err
+	}
 
 	fmt.Println("successfully connected to database")
 
