@@ -12,26 +12,26 @@ import (
 func Run() error {
 	fmt.Println("Starting up our application...")
 
-	store, err := db.NewDatabase()
+	db, err := db.NewDatabase()
 	if err != nil {
 		return fmt.Errorf("could not connect to database: %w", err)
 	}
 
-	if err := db.MigrateDB(store); err != nil {
+	if err := db.MigrateDB(); err != nil {
 		fmt.Println("failed to migrate database")
 		return err
 	}
 
-	cmtService := comment.NewService(store)
+	cmtService := comment.NewService(db)
 
-	cmtService.PostComment(context.Background(), comment.Comment{
-		ID:     "71c5d074-b6cf-11ec-b909-0242ac120002",
-		Slug:   "test-slug",
-		Body:   "test-body",
-		Author: "test-author",
-	})
+	// cmtService.PostComment(context.Background(), comment.Comment{
+	// 	ID:     "71c5d074-b6cf-11ec-b909-0242ac120002",
+	// 	Slug:   "test-slug",
+	// 	Body:   "test-body",
+	// 	Author: "test-author",
+	// })
 
-	fmt.Println(cmtService.GetComment(context.Background(), "71c5d074-b6cf-11ec-b909-0242ac120002"))
+	fmt.Println(cmtService.GetComment(context.Background(), "35270f54-a188-49b9-9c6e-4d853e72eca6"))
 
 	fmt.Println("successfully connected to database")
 

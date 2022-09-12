@@ -11,7 +11,7 @@ import (
 )
 
 // MigrateDB - migrates our database and creates our comment table
-func MigrateDB(d *Database) error {
+func (d *Database) MigrateDB() error {
 	fmt.Println("migrating database")
 	driver, err := postgres.WithInstance(d.Client.DB, &postgres.Config{})
 	if err != nil {
