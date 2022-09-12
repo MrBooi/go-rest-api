@@ -3,7 +3,9 @@ module github.com/MrBooi/go-rest-api
 go 1.18
 
 require (
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
 	github.com/doug-martin/goqu/v9 v9.18.0 // indirect
+	github.com/golang-jwt/jwt/v4 v4.4.2 // indirect
 	github.com/golang-migrate/migrate v3.5.4+incompatible // indirect
 	github.com/golang-migrate/migrate/v4 v4.15.2 // indirect
 	github.com/gorilla/mux v1.8.0 // indirect
