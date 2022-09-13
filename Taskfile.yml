@@ -12,7 +12,7 @@ tasks:
   integration_test:
     cmds:
       - docker-compose up -d db
-      - go test -tags=integration ./... -v
+      - go test -tags=integration -v ./...
     env:
       DB_USERNAME: postgres
       DB_PASSWORD: postgres
@@ -21,6 +21,11 @@ tasks:
       DB_TABLE: postgres
       DB_PORT: 5432
       SSL_MODE: disable
+
+  end_two_end_test:
+    cmds:
+      - docker-compose up -d --build
+      - go test -tags=end_two_end -v ./...
 
   lint:
     cmds:
